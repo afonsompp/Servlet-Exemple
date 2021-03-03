@@ -33,7 +33,7 @@ public class NewEnterpriseServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setAttribute("enterprises", Data.findAll());
-		var rd = req.getRequestDispatcher("list-enterprise.jsp");
+		var rd = req.getRequestDispatcher("/list-enterprise.jsp");
 		rd.forward(req, res);
 	}
 
