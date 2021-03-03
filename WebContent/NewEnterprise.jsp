@@ -13,15 +13,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
-<c:url value="/NewEnterprise.jsp" var="linkNewEn" />
+<c:url value="/enterprise" var="enterprise" />
 </head>
 <body>
-	<ul>
-		<c:forEach items="${ enterprises }" var="e">
-			<li>${ e.name }</li>
-		</c:forEach>
-	</ul>
-	
-	<a href="${ linkNewEn }">Cadastrar nova empresa</a>
+
+	<form action="${ enterprise }" method="post">
+		<span>Digite o nome da empresa</span> <input type="text" name="name" />
+		<br> <input type="submit" value="Cadastrar" />
+	</form>
 </body>
 </html>
