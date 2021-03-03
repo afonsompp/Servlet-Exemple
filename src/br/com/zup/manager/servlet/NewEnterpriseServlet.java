@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
+
 /**
  * Servlet implementation class NewEnterpriseServlet
  */
@@ -16,24 +18,23 @@ public class NewEnterpriseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		var out = res.getWriter();
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		var name = req.getParameter("name");
 		var enterprise = new Enterprise(name);
 		Data.save(enterprise);
-		out.println("<html><body><p>Empresas:</p><ul>");
-		Data.findAll().forEach(e -> out.println("<li>" + e.getName() + "</li>"));
-		out.println("</ul></body></html>");
+		
+		req.setAttribute("enterprises", Data.findAll());
+		var rd = req.getRequestDispatcher("/list-enterprise.jsp");
+		rd.forward(req, res);
+		//Data.findAll().forEach(e -> out.println("<li>" + e.getName() + "</li>"));
+		
 	}
-	
+
 	@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			var out = resp.getWriter();
-			out.println("<html><body><p>Empresas:</p><ul>");
-			Data.findAll().forEach(e -> out.println("<li>" + "Id: " + e.getId() 
-			+ " | Nome usual: "+ e.getName() + "</li>"));
-			out.println("</ul></body></html>");
-		}
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setAttribute("enterprises", Data.findAll());
+		var rd = req.getRequestDispatcher("list-enterprise.jsp");
+		rd.forward(req, res);
+	}
 
 }
