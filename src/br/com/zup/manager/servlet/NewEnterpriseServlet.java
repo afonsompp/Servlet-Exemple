@@ -23,19 +23,13 @@ public class NewEnterpriseServlet extends HttpServlet {
 		var name = req.getParameter("name");
 		var fundation = req.getParameter("fundation");
 		var enterprise = new Enterprise(name, LocalDate.parse(fundation));
+		req.setAttribute("enterprise", enterprise);
 		Data.save(enterprise);
-		
-		req.setAttribute("enterprises", Data.findAll());
-		var rd = req.getRequestDispatcher("/list-enterprise.jsp");
-		rd.forward(req, res);
-		
+		res.sendRedirect("list-enterprises");
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setAttribute("enterprises", Data.findAll());
-		var rd = req.getRequestDispatcher("/list-enterprise.jsp");
-		rd.forward(req, res);
+		res.sendRedirect("list-enterprises");
 	}
-
 }

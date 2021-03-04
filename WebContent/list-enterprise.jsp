@@ -14,19 +14,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 <c:url value="/NewEnterprise.jsp" var="linkNewEn" />
+<c:url value="/RemoveEnterprise" var="delete" />
+<c:url value="/UpdateEnterprise.jsp" var="update" />
 
 </head>
 <body>
-	<ul>
+	<c:if test="${ not empty enterprise }">
+		Empresa ${ enterprise } cadastrada com sucesso!
+		<hr />
+	</c:if>
 
-		<c:forEach items="${ enterprises }" var="e">
-			<fmt:parseDate value="${e.fundation }" type="date" var="date"
-				pattern="yyyy-MM-dd" />
-			<fmt:formatDate value="${ date }" type="date" var="fundation"
-				pattern="dd/MM/yyyy" />
-			<li>Nome: ${ e.name } - Fundação: ${ fundation }</li>
-		</c:forEach>
-	</ul>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Fundação</th>
+				<th>Ações</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<c:forEach items="${ enterprises }" var="e">
+				<tr>
+					<fmt:parseDate value="${e.fundation }" type="date" var="date"
+						pattern="yyyy-MM-dd" />
+					<fmt:formatDate value="${ date }" type="date" var="fundation"
+						pattern="dd/MM/yyyy" />
+					<td>${ e.id }</td>
+					<td>${ e.name }</td>
+					<td>${ fundation }</td>
+					<td>
+						<a href="${ delete }?id=${e.id}">Excluir </a> | 
+						<a href="${ update }?id=${e.id}&name=${e.name}&fundation=${e.fundation}">Atualizar</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 	<a href="${ linkNewEn }">Cadastrar nova empresa</a>
 </body>
