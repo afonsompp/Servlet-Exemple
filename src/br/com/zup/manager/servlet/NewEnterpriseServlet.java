@@ -1,6 +1,7 @@
 package br.com.zup.manager.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,13 +21,13 @@ public class NewEnterpriseServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		var name = req.getParameter("name");
-		var enterprise = new Enterprise(name);
+		var fundation = req.getParameter("fundation");
+		var enterprise = new Enterprise(name, LocalDate.parse(fundation));
 		Data.save(enterprise);
 		
 		req.setAttribute("enterprises", Data.findAll());
 		var rd = req.getRequestDispatcher("/list-enterprise.jsp");
 		rd.forward(req, res);
-		//Data.findAll().forEach(e -> out.println("<li>" + e.getName() + "</li>"));
 		
 	}
 

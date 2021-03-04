@@ -18,8 +18,12 @@
 <body>
 
 	<form action="${ enterprise }" method="post">
-		<span>Digite o nome da empresa</span> <input type="text" name="name" />
-		<br> <input type="submit" value="Cadastrar" />
+		<span>Nome da empresa: </span> <input type="text" name="name" /> <br>
+		<br>
+		<span>Data de fundação: </span> <input type="date" name=fundation />
+
+		<br><br>
+		<input type="submit" value="Cadastrar" />
 	</form>
 </body>
 </html>

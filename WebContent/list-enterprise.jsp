@@ -14,14 +14,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 <c:url value="/NewEnterprise.jsp" var="linkNewEn" />
+
 </head>
 <body>
 	<ul>
+
 		<c:forEach items="${ enterprises }" var="e">
-			<li>${ e.name }</li>
+			<fmt:parseDate value="${e.fundation }" type="date" var="date"
+				pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${ date }" type="date" var="fundation"
+				pattern="dd/MM/yyyy" />
+			<li>Nome: ${ e.name } - Fundação: ${ fundation }</li>
 		</c:forEach>
 	</ul>
-	
+
 	<a href="${ linkNewEn }">Cadastrar nova empresa</a>
 </body>
 </html>
